@@ -4,9 +4,9 @@
  */
 package Farmacia.Web.dao;
 
-import Farmacia.Web.domain.Categoria;
+import Farmacia.Web.domain.Farmacia;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CategoriaDao extends JpaRepository <Categoria,Long> {
+public interface FarmaciaDao extends JpaRepository <Farmacia,Long> {
     
 }

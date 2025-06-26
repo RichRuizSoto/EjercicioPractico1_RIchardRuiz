@@ -5,23 +5,23 @@
 package Farmacia.Web.service.impl;
 
 
-import Farmacia.Web.dao.CategoriaDao;
-import Farmacia.Web.domain.Categoria;
-import Farmacia.Web.service.CategoriaService;
+import Farmacia.Web.domain.Farmacia;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import Farmacia.Web.dao.FarmaciaDao;
+import Farmacia.Web.service.FarmaciaService;
 
 @Service
-public class CategoriaServiceImpl implements CategoriaService {
+public class FarmaciaServiceImpl implements FarmaciaService {
 
      @Autowired
-    private CategoriaDao categoriaDao;
+    private FarmaciaDao categoriaDao;
 
     @Override
     @Transactional(readOnly = true)
-    public List<Categoria> getCategorias(boolean activos) {
+    public List<Farmacia> getCategorias(boolean activos) {
         var lista = categoriaDao.findAll();
         if (activos) {
             lista.removeIf(e -> !e.isActivo());
@@ -31,19 +31,19 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     @Transactional(readOnly = true)
-    public Categoria getCategoria(Categoria categoria) {
+    public Farmacia getCategoria(Farmacia categoria) {
         return categoriaDao.findById(categoria.getIdCategoria()).orElse(null);
     }
 
     @Override
     @Transactional
-    public void save(Categoria categoria) {
+    public void save(Farmacia categoria) {
         categoriaDao.save(categoria);
     }
 
     @Override
     @Transactional
-    public void delete(Categoria categoria) {
+    public void delete(Farmacia categoria) {
         categoriaDao.delete(categoria);
     }
     

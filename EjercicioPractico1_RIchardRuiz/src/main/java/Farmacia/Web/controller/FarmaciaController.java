@@ -1,7 +1,6 @@
 package Farmacia.Web.controller;
 
-import Farmacia.Web.domain.Categoria;
-import Farmacia.Web.service.CategoriaService;
+import Farmacia.Web.domain.Farmacia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,13 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import Farmacia.Web.service.FarmaciaService;
 
 @Controller
 @RequestMapping("/categoria")
-public class CategoriaController {
+public class FarmaciaController {
 
     @Autowired
-    private CategoriaService categoriaService;
+    private FarmaciaService categoriaService;
 
     @GetMapping("/listado")
     public String listado(Model model) {
@@ -27,7 +27,7 @@ public class CategoriaController {
     }
 
     @GetMapping("/nuevo")
-    public String categoriaNuevo(Categoria categoria) {
+    public String categoriaNuevo(Farmacia categoria) {
         return "/categoria/modifica";
     }
 
@@ -36,7 +36,7 @@ public class CategoriaController {
     // private FirebaseStorageServiceImpl firebaseStorageService;
 
     @PostMapping("/guardar")
-    public String categoriaGuardar(Categoria categoria,
+    public String categoriaGuardar(Farmacia categoria,
             @RequestParam("imagenFile") MultipartFile imagenFile) {
 
         if (!imagenFile.isEmpty()) {
@@ -51,13 +51,13 @@ public class CategoriaController {
     }
 
     @GetMapping("/eliminar/{idCategoria}")
-    public String categoriaEliminar(Categoria categoria) {
+    public String categoriaEliminar(Farmacia categoria) {
         categoriaService.delete(categoria);
         return "redirect:/categoria/listado";
     }
 
     @GetMapping("/modificar/{idCategoria}")
-    public String categoriaModificar(Categoria categoria, Model model) {
+    public String categoriaModificar(Farmacia categoria, Model model) {
         categoria = categoriaService.getCategoria(categoria);
         model.addAttribute("categoria", categoria);
         return "/categoria/modifica";

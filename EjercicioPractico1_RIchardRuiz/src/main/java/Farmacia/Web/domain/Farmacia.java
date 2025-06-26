@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="categoria")
-public class Categoria implements Serializable {
+public class Farmacia implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -23,10 +23,10 @@ public class Categoria implements Serializable {
     private String rutaImagen;
     private boolean activo;
 
-    public Categoria() {
+    public Farmacia() {
     }
 
-    public Categoria(String categoria, boolean activo) {
+    public Farmacia(String categoria, boolean activo) {
         this.descripcion = categoria;
         this.activo = activo;
     }

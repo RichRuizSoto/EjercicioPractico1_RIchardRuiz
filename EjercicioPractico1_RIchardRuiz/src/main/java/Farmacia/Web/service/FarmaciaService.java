@@ -5,21 +5,21 @@
 package Farmacia.Web.service;
 
 
-import Farmacia.Web.domain.Categoria;
+import Farmacia.Web.domain.Farmacia;
 import java.util.List;
 
-public interface CategoriaService {
+public interface FarmaciaService {
 
-    public List<Categoria> getCategorias(boolean activo);
+    public List<Farmacia> getCategorias(boolean activo);
 
     // Se obtiene un Categoria, a partir del id de un categoria
-    public Categoria getCategoria(Categoria categoria);
+    public Farmacia getCategoria(Farmacia categoria);
     
     // Se inserta un nuevo categoria si el id del categoria esta vacío
     // Se actualiza un categoria si el id del categoria NO esta vacío
-    public void save(Categoria categoria);
+    public void save(Farmacia categoria);
     
     // Se elimina el categoria que tiene el id pasado por parámetro
-    public void delete(Categoria categoria);
+    public void delete(Farmacia categoria);
 }
  
