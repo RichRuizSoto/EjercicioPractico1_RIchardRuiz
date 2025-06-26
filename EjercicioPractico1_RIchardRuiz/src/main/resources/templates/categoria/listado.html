@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla :: head}">
-        <title>Farmacia</title>
-    </head>
-    <body>
-        <header th:replace="~{layout/plantilla :: header}"/>
-
-        <section th:replace="~{categoria/fragmentos :: botonesAgregar}"/>
-        <section th:replace="~{categoria/fragmentos :: agregarCategoria}"/> 
-        <section th:replace="~{categoria/fragmentos :: listadoCategorias}"/>
-
-        <footer th:replace="~{layout/plantilla :: footer}"/>      
-      
-    </body>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: layout">
+<body>
+    <div th:fragment="content">
+        <h2>Listado de Productos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td th:text="${producto.categoria.nombre}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
 </html>
-
-
-
-
-
-
-
- 

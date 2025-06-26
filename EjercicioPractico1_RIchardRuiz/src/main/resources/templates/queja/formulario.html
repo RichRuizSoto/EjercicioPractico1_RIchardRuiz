@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: body">
+<body>
+    <h2>Enviar Queja o Sugerencia</h2>
+    <form th:action="@{/queja/enviar}" method="post" th:object="${queja}">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombreCliente}" required><br>
+
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required><br>
+
+        <label>Mensaje:</label>
+        <textarea th:field="*{mensaje}" rows="5" cols="30" required></textarea><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

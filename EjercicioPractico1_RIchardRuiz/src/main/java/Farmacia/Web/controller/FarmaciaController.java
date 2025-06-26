@@ -1,65 +1,61 @@
 package Farmacia.Web.controller;
 
-import Farmacia.Web.domain.Farmacia;
+import Farmacia.Web.domain.Producto;
+import Farmacia.Web.domain.Categoria;
+import Farmacia.Web.domain.Queja;
+import Farmacia.Web.service.ProductoService;
+import Farmacia.Web.service.CategoriaService;
+import Farmacia.Web.service.QuejaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import Farmacia.Web.service.FarmaciaService;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/categoria")
 public class FarmaciaController {
 
     @Autowired
-    private FarmaciaService categoriaService;
+    private ProductoService productoService;
 
-    @GetMapping("/listado")
-    public String listado(Model model) {
-        var categorias = categoriaService.getCategorias(false);
-        model.addAttribute("categorias", categorias);
-        model.addAttribute("totalCategorias", categorias.size());
-        return "/categoria/listado";
+    @Autowired
+    private CategoriaService categoriaService;
+
+    @Autowired
+    private QuejaService quejaService;
+
+    @GetMapping("/")
+    public String inicio(Model model) {
+        return "index";
     }
 
-    @GetMapping("/nuevo")
-    public String categoriaNuevo(Farmacia categoria) {
-        return "/categoria/modifica";
+    @GetMapping("/productos")
+    public String listarProductos(Model model) {
+        model.addAttribute("productos", productoService.listarProductos());
+        return "categoria/listado";
     }
 
-    // Descomenta e inyecta el servicio de Firebase si lo vas a usar
-    // @Autowired
-    // private FirebaseStorageServiceImpl firebaseStorageService;
-
-    @PostMapping("/guardar")
-    public String categoriaGuardar(Farmacia categoria,
-            @RequestParam("imagenFile") MultipartFile imagenFile) {
-
-        if (!imagenFile.isEmpty()) {
-            categoriaService.save(categoria);
-            // Si usas Firebase, carga la imagen y asigna la ruta
-            // categoria.setRutaImagen(
-            //     firebaseStorageService.cargaImagen(imagenFile, "categoria", categoria.getIdCategoria())
-            // );
-        }
-        categoriaService.save(categoria);
-        return "redirect:/categoria/listado";
+    @GetMapping("/producto/nuevo")
+    public String nuevoProducto(Model model) {
+        model.addAttribute("producto", new Producto());
+        model.addAttribute("categorias", categoriaService.listarCategorias());
+        return "categoria/fragmentos";
     }
 
-    @GetMapping("/eliminar/{idCategoria}")
-    public String categoriaEliminar(Farmacia categoria) {
-        categoriaService.delete(categoria);
-        return "redirect:/categoria/listado";
+    @PostMapping("/producto/guardar")
+    public String guardarProducto(@ModelAttribute Producto producto) {
+        productoService.guardarProducto(producto);
+        return "redirect:/productos";
     }
 
-    @GetMapping("/modificar/{idCategoria}")
-    public String categoriaModificar(Farmacia categoria, Model model) {
-        categoria = categoriaService.getCategoria(categoria);
-        model.addAttribute("categoria", categoria);
-        return "/categoria/modifica";
+    @GetMapping("/queja")
+    public String quejaForm(Model model) {
+        model.addAttribute("queja", new Queja());
+        return "queja/formulario";
+    }
+
+    @PostMapping("/queja/enviar")
+    public String enviarQueja(@ModelAttribute Queja queja) {
+        quejaService.guardarQueja(queja);
+        return "redirect:/";
     }
 }
