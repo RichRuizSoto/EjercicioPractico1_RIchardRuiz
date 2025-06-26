@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: layout(~{::contenido})">
+    <head><link rel="stylesheet" th:href="@{/css/estilos.css}" /></head>
+
 <body>
     <div th:fragment="contenido">
         <h2>Agregar Producto</h2>
