@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: layout(~{::contenido})">
 <body>
-    <div th:fragment="content">
+    <div th:fragment="contenido">
         <h2>Listado de Productos</h2>
         <table>
             <thead>
@@ -14,10 +14,10 @@
             </thead>
             <tbody>
                 <tr th:each="producto : ${productos}">
-                    <td th:text="${producto.nombre}"></td>
-                    <td th:text="${producto.descripcion}"></td>
-                    <td th:text="${producto.precio}"></td>
-                    <td th:text="${producto.categoria.nombre}"></td>
+                    <td th:text="${producto.nombre}">Nombre</td>
+                    <td th:text="${producto.descripcion}">Descripción</td>
+                    <td th:text="${#numbers.formatDecimal(producto.precio,1,2)}">Precio</td>
+                    <td th:text="${producto.categoria.nombre}">Categoría</td>
                 </tr>
             </tbody>
         </table>

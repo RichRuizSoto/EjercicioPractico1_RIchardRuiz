@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Farmacia</title>
-  <link rel="stylesheet" href="./../../static/css/estilos.css">
+    <meta charset="UTF-8" />
+    <title>Farmacia Sanar</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
 </head>
-<body th:fragment="layout">
+<body>
 
-<!-- Header -->
-<header>
-    <h1>Farmacia Sanar</h1>
-</header>
+    <!-- Fragmento de header -->
+    <header th:fragment="header">
+        <h1>Farmacia Sanar</h1>
+    </header>
 
-<!-- Navbar -->
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Inicio</a></li>
-        <li><a th:href="@{/productos}">Productos</a></li>
-        <li><a th:href="@{/producto/nuevo}">Agregar Producto</a></li>
-        <li><a th:href="@{/queja}">Quejas/Sugerencias</a></li>
-    </ul>
-</nav>
+    <!-- Fragmento de navbar -->
+    <nav th:fragment="navbar">
+        <ul>
+            <li><a th:href="@{/}">Inicio</a></li>
+            <li><a th:href="@{/productos}">Productos</a></li>
+            <li><a th:href="@{/producto/nuevo}">Agregar Producto</a></li>
+            <li><a th:href="@{/queja}">Quejas/Sugerencias</a></li>
+        </ul>
+    </nav>
 
-<!-- Contenido -->
-<div th:replace="~{::content}"></div>
+    <!-- Fragmento de footer -->
+    <footer th:fragment="footer">
+        <p>&copy; 2025 Farmacia Sanar - Todos los derechos reservados</p>
+    </footer>
 
-<!-- Footer -->
-<footer>
-    <p>&copy; 2025 Farmacia Sanar - Todos los derechos reservados</p>
-</footer>
+    <!-- Fragmento de layout general que incluye los otros -->
+    <div th:fragment="layout (contenido)">
+        <div th:replace="layout/plantilla :: header"></div>
+        <div th:replace="layout/plantilla :: navbar"></div>
+
+        <!-- Contenido específico de la vista -->
+        <div th:insert="${contenido}"></div>
+
+        <div th:replace="layout/plantilla :: footer"></div>
+    </div>
 
 </body>
 </html>

@@ -1,18 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: body">
-<body>
-    <h2>Enviar Queja o Sugerencia</h2>
-    <form th:action="@{/queja/enviar}" method="post" th:object="${queja}">
-        <label>Nombre:</label>
-        <input type="text" th:field="*{nombreCliente}" required><br>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Quejas</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+</head>
+<body th:replace="layout/plantilla :: layout(~{::contenido})">
 
-        <label>Email:</label>
-        <input type="email" th:field="*{email}" required><br>
+<!-- Este es el contenido que será insertado en el layout -->
+<div th:fragment="contenido">
+    <main>
+        <h2>Formulario de Quejas y Sugerencias</h2>
 
-        <label>Mensaje:</label>
-        <textarea th:field="*{mensaje}" rows="5" cols="30" required></textarea><br>
+        <form th:action="@{/queja/enviar}" th:object="${queja}" method="post">
+            <div>
+                <label for="nombreCliente">Nombre:</label>
+                <input type="text" id="nombreCliente" th:field="*{nombreCliente}" required />
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" required />
+            </div>
+            <div>
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" th:field="*{mensaje}" rows="4" required></textarea>
+            </div>
+            <div>
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </main>
+</div>
 
-        <button type="submit">Enviar</button>
-    </form>
 </body>
 </html>

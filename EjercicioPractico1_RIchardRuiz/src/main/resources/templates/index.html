@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: layout">
-<body>
-    <div th:fragment="content">
-        <section>
-            <h2>Bienvenido a Farmacia Sanar</h2>
-            <p>Tu salud es nuestra prioridad. Aquí encontrarás medicamentos de calidad y atención confiable.</p>
-            <h3>Conoce más sobre el Paracetamol:</h3>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/mL8ONkrOAFo"
-                    title="Video sobre Paracetamol" frameborder="0" allowfullscreen></iframe>
-        </section>
-    </div>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Inicio</title>
+</head>
+<body th:replace="layout/plantilla :: layout(~{::contenido})">
+
+<div th:fragment="contenido">
+    <main>
+        <h2>Bienvenido a Farmacia Sanar</h2>
+        <p>Esta es la página de inicio del sistema.</p>
+    </main>
+</div>
+
 </body>
 </html>

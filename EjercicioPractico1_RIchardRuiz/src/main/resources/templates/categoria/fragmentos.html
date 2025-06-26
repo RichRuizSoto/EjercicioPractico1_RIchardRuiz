@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/plantilla :: layout(~{::contenido})">
 <body>
-    <div th:fragment="content">
+    <div th:fragment="contenido">
         <h2>Agregar Producto</h2>
         <form th:action="@{/producto/guardar}" method="post" th:object="${producto}">
             <label>Nombre:</label>
-            <input type="text" th:field="*{nombre}" required><br>
-            
+            <input type="text" th:field="*{nombre}" required /><br />
+
             <label>Descripción:</label>
-            <input type="text" th:field="*{descripcion}" required><br>
-            
+            <input type="text" th:field="*{descripcion}" required /><br />
+
             <label>Precio:</label>
-            <input type="number" th:field="*{precio}" step="0.01" required><br>
-            
+            <input type="number" th:field="*{precio}" step="0.01" required /><br />
+
             <label>Categoría:</label>
             <select th:field="*{categoria}" required>
-                <option th:each="cat : ${categorias}" 
-                        th:value="${cat}" 
-                        th:text="${cat.nombre}">Categoría</option>
-            </select><br>
+                <option th:each="cat : ${categorias}" th:value="${cat}" th:text="${cat.nombre}">Categoría</option>
+            </select><br />
 
             <button type="submit">Guardar</button>
         </form>
